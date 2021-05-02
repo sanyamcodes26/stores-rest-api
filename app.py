@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -8,7 +10,7 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATATBASE_URL','sqlite:///data.db')#database_url is for postresql for heroku add-on
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] =False #turning off flask sql alchemy tracker while sqlalchemy own tracker active
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'sanyam'
